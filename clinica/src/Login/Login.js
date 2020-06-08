@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { InputText } from 'primereact/inputtext';
 import { Password } from 'primereact/password';
-import { Card } from 'primereact/card';
+import { Button } from 'primereact/button';
 
 import logo from '../resources/images/hospital.svg';
 
@@ -10,30 +10,58 @@ import './Login.css';
 class Login extends Component {
 
     render() {
-        const clinicaLogo = <img src={logo} className='App-logo-login' alt='clinica-X' />;
 
         return (
-            <div className="Login">
-                <Card header={clinicaLogo}
-                    title='Clinica X'
-                    subTitle='Iniciar sesion'>
-                        
-                    <div className='p-fluid'>
-                        <div className='p-field p-grid'>
-                            <label htmlFor='username' className='p-col-12 p-md-2'>Usuario</label>
-                            <div className='p-col-12 p-md-10'>
-                                <InputText id='username' type='text' />
-                            </div>
-                        </div>
-                        <div className='p-field p-grid'>
-                            <label htmlFor='password' className='p-col-12 p-md-2'>Password</label>
-                            <div className='p-col-12 p-md-10'>
-                                <Password id='password' type='text' />
-                            </div>
+            <div className="Login App-login-area">
+
+                <div className='App-logo-login-area'>
+                    <img 
+                        src={logo} 
+                        className='App-logo-login App-centered-image' 
+                        alt='clinica-X'/>
+                </div>
+
+                <div className='App-login-header'>
+                    <h3>CLINICA PURPURA VISUAL</h3>
+                </div>
+
+                <div className='p-grid p-fluid'>
+                    <div className='p-col-12'>
+                        <div className='p-inputgroup'>
+                            <span className='p-inputgroup-addon'>
+                                <i className='pi pi-user'></i>
+                            </span>
+                            <InputText 
+                                id='username' 
+                                type='text' 
+                                placeholder='Usuario'/>
                         </div>
                     </div>
-                </Card>
-
+                    <div className='p-col-12'>
+                        <div className='p-inputgroup'>
+                            <span className='p-inputgroup-addon'>
+                                <i className='pi pi-key'></i>
+                            </span>
+                            <Password 
+                                id='password' 
+                                placeholder='Contrasena'
+                                feedback={false}
+                                type='text' />
+                        </div>
+                    </div>
+                    <div className='p-col-12 p-md-6 p-lg-6'>
+                        <Button 
+                            label='Ingresar'
+                            className='p-button-rounded'>
+                        </Button>
+                    </div>
+                    <div className='p-col-12 p-md-6 p-lg-6'>
+                        <Button 
+                            label='Olvide contrasena'
+                            className='p-button-rounded p-button-secondary'>
+                        </Button>
+                    </div>
+                </div>
             </div>
         );
     }

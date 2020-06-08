@@ -1,3 +1,20 @@
 .App-logo-login {
     height: 80px;
 }
+
+.App-centered-image {
+    margin: auto;
+    display: block;
+}
+
+.App-logo-login-area {
+    margin: 50px
+}
+
+.App-login-header{
+    text-align: center;
+}
+
+.App-login-area {
+    padding: 15px;
+}
