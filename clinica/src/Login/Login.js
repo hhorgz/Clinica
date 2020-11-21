@@ -41,7 +41,7 @@ class Login extends Component {
                 </div>
 
                 <div className='App-login-header'>
-                    <h3>CLINICA PURPURA VISUAL</h3>
+                    <h3>CL&Iacute;NICA P&Uacute;RPURA VISUAL</h3>
                 </div>
                 {formShowed}
             </div>

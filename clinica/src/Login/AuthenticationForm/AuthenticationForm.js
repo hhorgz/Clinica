@@ -36,7 +36,7 @@ const recoverPassword = (props) => {
             </div>
             <div className='p-col-12 p-md-6 p-lg-6'>
                 <Button 
-                    label='Olvide contrasena'
+                    label='Olvid&eacute; contrase&ntilde;a'
                     className='p-button-rounded p-button-secondary'
                     onClick={props.click} />
             </div>
