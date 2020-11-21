@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Login from './Login/Login';
+import Login from './containers/Login';
 
 import 'primereact/resources/themes/nova-colored/theme.css';
 import 'primereact/resources/primereact.min.css';

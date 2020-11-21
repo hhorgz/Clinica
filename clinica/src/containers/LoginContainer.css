@@ -1,0 +1,10 @@
+.App-banner-login {
+    margin: auto;
+    display: block;
+    width: 100%;
+    background-color: #060045;
+}
+
+.App-centered-login {
+    height: 100vh;
+}
