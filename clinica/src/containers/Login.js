@@ -20,7 +20,8 @@ class Login extends Component {
                     <div className='box box-stretched'>
                         <img 
                             src={backgroundImage}
-                            className="App-banner-login App-centered-login"/>
+                            className="App-banner-login App-centered-login"
+                            alt=""/>
                     </div>
                 </div>
             </div>

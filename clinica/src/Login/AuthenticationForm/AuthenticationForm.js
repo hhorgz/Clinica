@@ -3,7 +3,7 @@ import { InputText } from 'primereact/inputtext';
 import { Password } from 'primereact/password';
 import { Button } from 'primereact/button';
 
-const recoverPassword = (props) => {
+const AuthenticationForm = (props) => {
     return(
         <div className='p-grid p-fluid'>
             <div className='p-col-12'>
@@ -44,4 +44,4 @@ const recoverPassword = (props) => {
     );
 }
 
-export default recoverPassword;
+export default AuthenticationForm;
