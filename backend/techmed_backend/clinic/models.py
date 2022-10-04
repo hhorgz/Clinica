@@ -1,6 +1,6 @@
+from email.policy import default
 from django.db import models
 
-# Create your models here.
 class Patient(models.Model):
     name = models.CharField(max_length=500)
     age = models.IntegerField(default=0)
@@ -9,7 +9,7 @@ class Patient(models.Model):
 
 class AppointmentType(models.Model):
     type = models.CharField(max_length=100)
-    estimated_time = models.TimeField
+    estimated_time = models.IntegerField('duration in minutes', default=0)
 
 class AppointmentStatus(models.Model):
     status = models.CharField(max_length=50)
