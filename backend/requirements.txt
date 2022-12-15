@@ -1,2 +1,5 @@
 psycopg2-binary==2.9.3
-Django==4.0.5
+Django==4.1.4
+djangorestframework
+markdown
+django-filter
