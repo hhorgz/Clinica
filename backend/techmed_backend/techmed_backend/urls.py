@@ -14,9 +14,14 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import include, path
-# from django.contrib import admin
-from rest_framework import routers
+#TODO: OAUTH
+from django.contrib import admin
+#TODO: OAUTH
+from rest_framework import routers, generics, permissions, serializers
+from oauth2_provider.contrib.rest_framework import TokenHasReadWriteScope, TokenHasScope
 from clinic import views
+#TODO: OAUTH
+admin.autodiscover()
 
 router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet)
@@ -28,7 +33,8 @@ router.register(r'appointment', views.AppointmentViewSet)
 
 urlpatterns = [
     # path('polls/', include('polls.urls')),
-    # path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls),
+    path('o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
     path('', include(router.urls)),
-    path('api-auth', include('rest_framework.urls', namespace='rest_framework'))
+    # path('api-auth', include('rest_framework.urls', namespace='rest_framework'))
 ]
