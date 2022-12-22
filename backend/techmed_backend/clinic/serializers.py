@@ -16,7 +16,7 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
 class PatientSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Patient
-        fields = ['name', 'age', 'birth_date', 'sex']
+        fields = ['id', 'name', 'age', 'birth_date', 'sex']
 
 class AppointmentTypeSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
