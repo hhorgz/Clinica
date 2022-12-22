@@ -28,9 +28,20 @@ create database techmed
 ## Django
 If is the first time running the application, make sure to run model's migration
 ```
+python manage.py makemigrations
 python manage.py migrate
+python manage.py createsuperuser
 ```
 
 # Running the app
 ```
 python manage.py runserver
+```
+
+# Authentication
+This API uses OAuth2 as an authentication method so you will need to create an application an save your client_id and client_secret. You can do it throught http://localhost/o/applications.  
+What will you need to access the API:  
+* client_id
+* client_secret
+* username
+* password
