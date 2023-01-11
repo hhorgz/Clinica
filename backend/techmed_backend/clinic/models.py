@@ -1,11 +1,16 @@
 from email.policy import default
 from django.db import models
 
+SEX_CHOICES = [
+    ('M', 'Masculino'),
+    ('F', 'Femenino')
+]
+
 class Patient(models.Model):
     name = models.CharField(max_length=500)
     age = models.IntegerField(default=0)
     birth_date = models.DateField()
-    sex = models.CharField(max_length=1, default='M')
+    sex = models.CharField(max_length=1, default='M', choices=SEX_CHOICES)
 
 class AppointmentType(models.Model):
     type = models.CharField(max_length=100)
