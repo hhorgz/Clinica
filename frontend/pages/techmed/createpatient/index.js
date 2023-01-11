@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
+import { Toast } from 'primereact/toast';
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
 import { Dropdown } from 'primereact/dropdown';
 import { Calendar } from 'primereact/calendar';
+import { PatientService } from '../../../demo/service/PatientService';
 
 const CreatePatient = () => {
+    const patientService = new PatientService();
+    const toast = useRef();
     const [name, setName] = useState('');
     const [birthDate, setBirthDate] = useState(null);
     const [gender, setGender] = useState(null);
@@ -14,33 +18,55 @@ const CreatePatient = () => {
         { label: 'Femenino', value: 'F' }
     ];
     const maxDate = new Date();
+ 
+    const showToast = (summary, severity, message) => {
+        toast.current.show({ severity: severity, summary: summary, detail: message, life: 5000 });
+    }
 
-    const postPatient = async (name, birthDate, sex) => {
-        await fetch('http://localhost:8000/patients/', {
+    const createPatient = async (name, birthDate, gender) => {
+        
+        await fetch(patientService.url + 'patients/', {
             method: 'POST',
             body: JSON.stringify({
                 name: name,
-                birth_date: birthDate.getFullYear() + '-' + ('00' + (birthDate.getMonth() + 1)).slice(-2) + '-' + ('00' + birthDate.getDate()).slice(-2),
-                sex: sex
+                birth_date: birthDate,
+                sex: gender
             }),
             headers: {
                 'Content-type': 'application/json; charset=UTF-8',
-                Authorization: "Bearer OsouFzTBOCQJ6YIAwSU7quqkqIWRra"
+                Authorization: patientService.bearerToken
             }
         })
             .then((response) => response.json())
             .then((data) => {
                 console.log(data);
+                if(data.hasOwnProperty('id') && data.id > 0){
+                    showToast('Nuevo paciente', 'success', 'El paciente fue creado con exito')
+                } else {
+                    showToast('Error', 'error', JSON.stringify(data));
+                }
             })
             .catch((err) => {
                 console.log(err.message);
+                showToast('Error', 'error', err.message);
             })
-    };
- 
+            .finally(() => {
+                setLoading(false);
+            });
+    } 
+
     const handleSubmit = (e) => {
         e.preventDefault();
         setLoading(true);
-        postPatient(name, birthDate, gender)
+        try{
+            var formatedDate = patientService.applyDateFormat(birthDate);
+        } catch (err) {
+            setLoading(false);
+            showToast('Fecha de nacimiento', 'warn', 'Hay error en la fecha de nacimiento');
+            setLoading(false);
+            return;
+        }
+        createPatient(name, formatedDate, gender);
     };
 
     return (
@@ -48,6 +74,7 @@ const CreatePatient = () => {
             <div className="col-12">
                 <div className="card p-fluid">
                     <h5>Registro de paciente</h5>
+                    <Toast ref = {toast} />
                     <form onSubmit={handleSubmit}>
                         <div className="field grid">
                             <label htmlFor="name" className="col-12 mb-2 md:col-2 md:mb-0">

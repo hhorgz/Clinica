@@ -1,36 +1,53 @@
 import React, { useEffect, useState } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
+import { PatientService } from '../../../demo/service/PatientService';
+import { Button } from 'primereact/button';
+import { Dialog } from 'primereact/dialog';
+import CreatePatient from '../createpatient';
 
 const PatientsList = () => {
+    const patientService = new PatientService();
     const [patients, setPatients] = useState([]);
     const [patientsLoading, setPatientsLoading] = useState(true);
+    const [displayCreatePatientForm, setDisplayCreatePatientForm] = useState(false);
+    
+    const openCreatePatientForm = () => {
+        setDisplayCreatePatientForm(true);
+    }
 
-    // REST API
-    useEffect(() => {
-        // TODO: Find a way to use ENV for URLs
-        fetch('http://localhost:8000/patients/', {
+    const listPatients = () => {
+        fetch(patientService.url + 'patients/', {
             headers: {
-                // TODO: Find a better way to store token, client_id and client_secret
-                Authorization: "Bearer OsouFzTBOCQJ6YIAwSU7quqkqIWRra"
+                Authorization: patientService.bearerToken
             }
         })
-            .then((response) => response.json())
+        .then((response) => response.json())
             .then((data) => {
                 console.log(data);
-                setPatients(data.results);
-                setPatientsLoading(false);
+                setPatients(data.results)
             })
             .catch((err) => {
-                console.log(err.message);
-            });
+                throw err.message;
+            })
+            .finally(() => setPatientsLoading(false));
+    }
+    
+    // REST API
+    useEffect(() => {
+        listPatients();
     }, []);
+    
+    const header = <Button icon='pi pi-user-plus' label='Registrar paciente' onClick={openCreatePatientForm}/>;
 
     return (
         <div className="grid">
             <div className="col-12">
                 <div className="card">
                     <h5>Pacientes</h5>
+                    <Dialog visible={displayCreatePatientForm} style={{ width: '30vw' }} modal onHide={() => setDisplayCreatePatientForm(false)}>
+                        <CreatePatient></CreatePatient>
+                    </Dialog>
                     <DataTable
                         value={patients}
                         paginator
@@ -41,6 +58,7 @@ const PatientsList = () => {
                         loading={patientsLoading}
                         responsiveLayout="scroll"
                         emptyMessage="No se encontraron pacientes"
+                        header={header}
                     >
                         <Column field="name" header="Nombre" />
                         <Column field="age" header="Edad" />
