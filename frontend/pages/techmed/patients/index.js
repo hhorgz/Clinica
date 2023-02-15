@@ -16,6 +16,27 @@ const PatientsList = () => {
         setDisplayCreatePatientForm(true);
     }
 
+    const editButtonTemplate = (patientId) => {
+        return (
+            <span className='p-buttonset'>
+                <Button 
+                    className='p-button-warning' 
+                    icon="pi pi-pencil" 
+                    tooltip="Editar" 
+                    tooltipOptions={{position: 'top'}}
+                    onClick={()=>{console.log('Editar paciente ')}}
+                />
+                <Button 
+                    className='p-button-danger' 
+                    icon="pi pi-trash" 
+                    tooltip="Eliminar" 
+                    tooltipOptions={{position: 'top'}}
+                    onClick={() => { console.log('Eliminar paciente ') }}
+                />
+            </span>
+        );
+    }
+
     const listPatients = () => {
         fetch(patientService.url + 'patients/', {
             headers: {
@@ -45,9 +66,12 @@ const PatientsList = () => {
             <div className="col-12">
                 <div className="card">
                     <h5>Pacientes</h5>
+                    {/* MODAL PARA CREAR PACIENTES */}
                     <Dialog visible={displayCreatePatientForm} style={{ width: '30vw' }} modal onHide={() => setDisplayCreatePatientForm(false)}>
                         <CreatePatient></CreatePatient>
                     </Dialog>
+
+                    {/* DATA TABLE QUE MUESTRA LISTA DE PACIENTES */}
                     <DataTable
                         value={patients}
                         paginator
@@ -64,6 +88,7 @@ const PatientsList = () => {
                         <Column field="age" header="Edad" />
                         <Column field="birth_date" header="Fecha de nacimiento" />
                         <Column field="sex" header="Sexo" />
+                        <Column headerStyle={{ width: '9rem' }} body={editButtonTemplate()}/>
                     </DataTable>
                 </div>
             </div>
