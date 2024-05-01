@@ -6,13 +6,14 @@ import { Dropdown } from 'primereact/dropdown';
 import { Calendar } from 'primereact/calendar';
 import { PatientService } from '../../../demo/service/PatientService';
 
-const CreatePatient = () => {
+const CreatePatient = ({operationType = 'Registrar'}) => {
     const patientService = new PatientService();
     const toast = useRef();
     const [name, setName] = useState('');
     const [birthDate, setBirthDate] = useState(null);
     const [gender, setGender] = useState(null);
     const [loading, setLoading] = useState(false);
+    const [operacion, setOperacion] = useState('crear');
     const genderSelectItems = [
         { label: 'Masculino', value: 'M' },
         { label: 'Femenino', value: 'F' }
@@ -101,7 +102,7 @@ const CreatePatient = () => {
                             </div>
                         </div>
                         <div className='col-12'>
-                            <Button label="Registrar" type='submit' loading={loading}></Button>
+                            <Button label={operationType} type='submit' loading={loading}></Button>
                         </div>
                     </form>
                 </div>

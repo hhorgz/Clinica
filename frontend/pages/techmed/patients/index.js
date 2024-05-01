@@ -11,12 +11,14 @@ const PatientsList = () => {
     const [patients, setPatients] = useState([]);
     const [patientsLoading, setPatientsLoading] = useState(true);
     const [displayCreatePatientForm, setDisplayCreatePatientForm] = useState(false);
+    const [operationType, setOperationType] = useState("Registrar");
     
-    const openCreatePatientForm = () => {
+    const openCreatePatientForm = (operationType) => {
+        setOperationType(operationType);
         setDisplayCreatePatientForm(true);
     }
 
-    const editButtonTemplate = (patientId) => {
+    const editButtonTemplate = (data) => {
         return (
             <span className='p-buttonset'>
                 <Button 
@@ -24,14 +26,17 @@ const PatientsList = () => {
                     icon="pi pi-pencil" 
                     tooltip="Editar" 
                     tooltipOptions={{position: 'top'}}
-                    onClick={()=>{console.log('Editar paciente ')}}
+                    // onClick={(e)=>{console.log("Editar paciente: ",data.id)}}
+                    onClick={(e) => {
+                        openCreatePatientForm("Editar");
+                    }}
                 />
                 <Button 
                     className='p-button-danger' 
                     icon="pi pi-trash" 
                     tooltip="Eliminar" 
                     tooltipOptions={{position: 'top'}}
-                    onClick={() => { console.log('Eliminar paciente ') }}
+                    onClick={() => { console.log('Eliminar paciente: ', data.id) }}
                 />
             </span>
         );
@@ -59,7 +64,7 @@ const PatientsList = () => {
         listPatients();
     }, []);
     
-    const header = <Button icon='pi pi-user-plus' label='Registrar paciente' onClick={openCreatePatientForm}/>;
+    const header = <Button icon='pi pi-user-plus' label='Registrar paciente' onClick={() => openCreatePatientForm("Registrar")}/>;
 
     return (
         <div className="grid">
@@ -68,7 +73,7 @@ const PatientsList = () => {
                     <h5>Pacientes</h5>
                     {/* MODAL PARA CREAR PACIENTES */}
                     <Dialog visible={displayCreatePatientForm} style={{ width: '30vw' }} modal onHide={() => setDisplayCreatePatientForm(false)}>
-                        <CreatePatient></CreatePatient>
+                        <CreatePatient operationType={operationType}></CreatePatient>
                     </Dialog>
 
                     {/* DATA TABLE QUE MUESTRA LISTA DE PACIENTES */}
@@ -88,7 +93,8 @@ const PatientsList = () => {
                         <Column field="age" header="Edad" />
                         <Column field="birth_date" header="Fecha de nacimiento" />
                         <Column field="sex" header="Sexo" />
-                        <Column headerStyle={{ width: '9rem' }} body={editButtonTemplate()}/>
+                        {/* <Column field="id" header="Id" /> */}
+                        <Column field="id" headerStyle={{ width: '9rem' }} body={editButtonTemplate}/>
                     </DataTable>
                 </div>
             </div>
