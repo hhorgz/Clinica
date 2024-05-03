@@ -14,7 +14,8 @@ class UserViewSet(viewsets.ModelViewSet):
     """
     queryset = User.objects.all().order_by('-date_joined')
     serializer_class = UserSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    # TODO: Re-enable permission
+    # permission_classes = [permissions.IsAuthenticated]
 
 
 class GroupViewSet(viewsets.ModelViewSet):
@@ -23,7 +24,8 @@ class GroupViewSet(viewsets.ModelViewSet):
     """
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    # TODO: Re-enable permission
+    # permission_classes = [permissions.IsAuthenticated]
 
 class PatientViewSet(viewsets.ModelViewSet):
     """
@@ -31,7 +33,8 @@ class PatientViewSet(viewsets.ModelViewSet):
     """
     queryset = Patient.objects.all().order_by('-name')
     serializer_class = PatientSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    # TODO: Re-enable permission
+    # permission_classes = [permissions.IsAuthenticated]
 
     def create(self, request):
         patient = request.data
@@ -56,7 +59,8 @@ class AppointmentTypeViewSet(viewsets.ModelViewSet):
     """
     queryset = AppointmentType.objects.all()
     serializer_class = AppointmentTypeSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    # TODO: Re-enable permission
+    # permission_classes = [permissions.IsAuthenticated]
 
 class AppointmentStatusViewSet(viewsets.ModelViewSet):
     """
@@ -64,7 +68,8 @@ class AppointmentStatusViewSet(viewsets.ModelViewSet):
     """
     queryset = AppointmentStatus.objects.all()
     serializer_class = AppointmentStatusSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    # TODO: Re-enable permission
+    # permission_classes = [permissions.IsAuthenticated]
 
 class AppointmentViewSet(viewsets.ModelViewSet):
     """
@@ -72,4 +77,5 @@ class AppointmentViewSet(viewsets.ModelViewSet):
     """
     queryset = Appointment.objects.all()
     serializer_class = AppointmentSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    # TODO: Re-enable permission
+    # permission_classes = [permissions.IsAuthenticated]

@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'oauth2_provider',
     'rest_framework',
-    'corsheaders',
+    'knox',
+    # 'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -135,18 +136,19 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # OAUTH2
 
-OAUTH2_PROVIDER = {
-    'SCOPES': {'read': 'Read scope', 'write': 'Write scope', 'groups': 'Access to your groups'}
-}
+# OAUTH2_PROVIDER = {
+#     'SCOPES': {'read': 'Read scope', 'write': 'Write scope', 'groups': 'Access to your groups'}
+# }
 
 # REST API
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
+        # 'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
+        # 'knox.auth.TokenAuthentication',
     ],
     'DEFAULT_PERMISSION_CLASSES': [
         # 'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',  
-        'rest_framework.permissions.IsAuthenticated',
+        # 'rest_framework.permissions.IsAuthenticated',
     ],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10

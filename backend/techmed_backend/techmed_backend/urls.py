@@ -18,7 +18,7 @@ from django.urls import include, path
 from django.contrib import admin
 #TODO: OAUTH
 from rest_framework import routers, generics, permissions, serializers
-from oauth2_provider.contrib.rest_framework import TokenHasReadWriteScope, TokenHasScope
+# from oauth2_provider.contrib.rest_framework import TokenHasReadWriteScope, TokenHasScope
 from clinic import views
 #TODO: OAUTH
 admin.autodiscover()
@@ -27,14 +27,14 @@ router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet)
 router.register(r'groups', views.GroupViewSet)
 router.register(r'patients', views.PatientViewSet)
-router.register(r'appointmentType', views.AppointmentTypeViewSet)
-router.register(r'appointmentStatus', views.AppointmentStatusViewSet)
-router.register(r'appointment', views.AppointmentViewSet)
+router.register(r'appointmentTypes', views.AppointmentTypeViewSet)
+router.register(r'appointmentStatuses', views.AppointmentStatusViewSet)
+router.register(r'appointments', views.AppointmentViewSet)
 
 urlpatterns = [
     # path('polls/', include('polls.urls')),
     path('admin/', admin.site.urls),
-    path('o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
+    # path('o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
     path('', include(router.urls)),
     # path('api-auth', include('rest_framework.urls', namespace='rest_framework'))
 ]

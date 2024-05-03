@@ -26,9 +26,9 @@ class AppointmentTypeSerializer(serializers.HyperlinkedModelSerializer):
 class AppointmentStatusSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = AppointmentStatus
-        fields = ['status']
+        fields = ['id', 'status']
 
-class AppointmentSerializer(serializers.HyperlinkedModelSerializer):
+class AppointmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Appointment
-        fields = ['patient', 'appointment_type', 'status', 'scheduled_date']
+        fields = ['id', 'patient', 'appointment_type', 'status', 'scheduled_date', 'comment']
