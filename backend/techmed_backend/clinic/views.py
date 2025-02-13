@@ -3,8 +3,8 @@ from rest_framework import viewsets
 from rest_framework import permissions
 from rest_framework.response import Response
 from django.http import JsonResponse
-from clinic.serializers import AppointmentSerializer, AppointmentStatusSerializer, AppointmentTypeSerializer, UserSerializer, GroupSerializer, PatientSerializer
-from clinic.models import Patient, AppointmentType, AppointmentStatus, Appointment
+from clinic.serializers import AppointmentSerializer, AppointmentStatusSerializer, AppointmentTypeSerializer, UserSerializer, GroupSerializer, PatientSerializer, DoctorSerializer
+from clinic.models import Patient, Doctor, AppointmentType, AppointmentStatus, Appointment
 from clinic.utils.DateUtils import calculateAge
 
 # Create your views here.
@@ -51,6 +51,12 @@ class PatientViewSet(viewsets.ModelViewSet):
         # Something went wrong
         return JsonResponse(serializer.errors, status = 500)
 
+class DoctorViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows doctors to be viewed or edited
+    """
+    queryset = Doctor.objects.all().order_by('-name')
+    serializer_class = DoctorSerializer
             
 
 class AppointmentTypeViewSet(viewsets.ModelViewSet):

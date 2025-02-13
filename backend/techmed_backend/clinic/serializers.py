@@ -1,6 +1,6 @@
 from dataclasses import field
 from django.contrib.auth.models import User, Group
-from clinic.models import Patient, AppointmentType, AppointmentStatus, Appointment
+from clinic.models import Patient, Doctor, AppointmentType, AppointmentStatus, Appointment
 from rest_framework import serializers
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -13,17 +13,22 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
         model = Group
         fields = ['url', 'name']
 
-class PatientSerializer(serializers.HyperlinkedModelSerializer):
+class PatientSerializer(serializers.ModelSerializer):
     class Meta:
         model = Patient
         fields = ['id', 'name', 'age', 'birth_date', 'sex']
 
-class AppointmentTypeSerializer(serializers.HyperlinkedModelSerializer):
+class DoctorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Doctor
+        fields = ['id', 'name', 'cui', 'professional_id', 'email', 'phone']
+
+class AppointmentTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = AppointmentType
-        fields = ['id', 'type', 'estimated_time']
+        fields = ['id', 'type', 'estimated_time', 'cost']
 
-class AppointmentStatusSerializer(serializers.HyperlinkedModelSerializer):
+class AppointmentStatusSerializer(serializers.ModelSerializer):
     class Meta:
         model = AppointmentStatus
         fields = ['id', 'status']

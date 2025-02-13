@@ -17,6 +17,8 @@ class Doctor(models.Model):
     name = models.CharField(max_length=500)
     cui = models.CharField(max_length=25)
     professional_id = models.CharField(max_length=25)
+    email = models.EmailField(max_length=100)
+    phone = models.CharField(max_length=20)
 
 class AppointmentType(models.Model):
     type = models.CharField(max_length=100)
